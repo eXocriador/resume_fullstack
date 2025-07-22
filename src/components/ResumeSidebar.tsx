@@ -56,31 +56,31 @@ const ResumeSidebar = () => {
               <span>Kyiv, Ukraine</span>
             </div>
             <a
-              href="https://github.com/olehtatar"
+              href="https://github.com/exocriador"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center hover:text-primary transition-colors"
             >
               <Github className="w-4 h-4 mr-3 text-muted-foreground" />
-              <span>github.com/olehtatar</span>
+              <span>github.com/exocriador</span>
             </a>
             <a
-              href="https://linkedin.com/in/olehtatar"
+              href="https://linkedin.com/in/exocriador"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center hover:text-primary transition-colors"
             >
               <Linkedin className="w-4 h-4 mr-3 text-muted-foreground" />
-              <span>linkedin.com/in/olehtatar</span>
+              <span>linkedin.com/in/exocriador</span>
             </a>
             <a
-              href="https://olehtatar.dev"
+              href="https://exocriador.dev"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center hover:text-primary transition-colors"
             >
               <Globe className="w-4 h-4 mr-3 text-muted-foreground" />
-              <span>olehtatar.dev</span>
+              <span>exocriador.dev</span>
             </a>
           </div>
         </div>
