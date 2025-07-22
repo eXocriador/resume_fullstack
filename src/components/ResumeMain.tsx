@@ -89,8 +89,8 @@ const ResumeMain = () => {
   return (
     <div className="col-span-1 lg:col-span-2 p-8 lg:p-10 bg-background">
       {/* Summary Section */}
-      <section className="p-6 border rounded-lg shadow-sm mb-8">
-        <h2 className="text-2xl font-bold text-primary mb-4 flex items-center">
+      <section className="p-6 border rounded-lg mb-8">
+        <h2 className="text-2xl font-bold text-primary mb-6 flex items-center">
           <User className="w-6 h-6 mr-3" />
           Summary
         </h2>
@@ -105,7 +105,7 @@ const ResumeMain = () => {
       </section>
 
       {/* Projects Section */}
-      <section className="p-6 border rounded-lg shadow-sm mb-8">
+      <section className="p-6 border rounded-lg mb-8">
         <h2 className="text-2xl font-bold text-primary mb-6 flex items-center">
           <Code className="w-6 h-6 mr-3" />
           Projects
@@ -121,7 +121,7 @@ const ResumeMain = () => {
                 <div className="flex gap-4">
                   <a
                     href={project.github}
-                    className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
+                    className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors hover:bg-accent rounded-md p-1"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -129,7 +129,7 @@ const ResumeMain = () => {
                   </a>
                   <a
                     href={project.demo}
-                    className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
+                    className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors hover:bg-accent rounded-md p-1"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -142,7 +142,7 @@ const ResumeMain = () => {
                   <Badge
                     key={techIndex}
                     variant="outline"
-                    className="font-normal"
+                    className="font-normal border-primary/50"
                   >
                     {tech}
                   </Badge>
@@ -157,7 +157,7 @@ const ResumeMain = () => {
       </section>
 
       {/* Core Competencies Section */}
-      <section className="p-6 border rounded-lg shadow-sm mb-8">
+      <section className="p-6 border rounded-lg mb-8">
         <h2 className="text-2xl font-bold text-primary mb-6 flex items-center">
           <Zap className="w-6 h-6 mr-3" />
           Core Competencies
@@ -175,7 +175,7 @@ const ResumeMain = () => {
       </section>
 
       {/* Education Section */}
-      <section className="p-6 border rounded-lg shadow-sm">
+      <section className="p-6 border rounded-lg">
         <h2 className="text-2xl font-bold text-primary mb-6 flex items-center">
           <GraduationCap className="w-6 h-6 mr-3" />
           Education
