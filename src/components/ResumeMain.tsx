@@ -1,58 +1,110 @@
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Github, GraduationCap, User, Code } from "lucide-react";
+import {
+  ExternalLink,
+  Github,
+  GraduationCap,
+  User,
+  Code,
+  Zap,
+  Users,
+  BrainCircuit,
+  MessageCircle
+} from "lucide-react";
+
+const CompetencyItem = ({
+  icon,
+  title,
+  description
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}) => (
+  <div>
+    <div className="flex items-center mb-1">
+      {icon}
+      <h4 className="font-semibold ml-2">{title}</h4>
+    </div>
+    <p className="text-sm text-muted-foreground leading-relaxed ml-7">
+      {description}
+    </p>
+  </div>
+);
 
 const ResumeMain = () => {
   const projects = [
     {
       name: "E-Commerce Platform",
       description:
-        "Full-stack e-commerce application featuring user authentication, product catalog, shopping cart, and Stripe payment integration.",
-      tech: ["React", "TypeScript", "Node.js", "MongoDB"],
+        "Engineered a full-stack e-commerce application featuring JWT-based user authentication, a dynamic product catalog, shopping cart functionality, and seamless payment processing with Stripe integration.",
+      tech: ["React", "TypeScript", "Node.js", "MongoDB", "Stripe API"],
       github: "https://github.com/olehtatar/ecommerce-app",
       demo: "https://ecommerce-demo.vercel.app"
     },
     {
       name: "Task Management App",
       description:
-        "A collaborative tool with real-time updates, team features, and project tracking, built with the MERN stack and Socket.io.",
-      tech: ["React", "Redux", "Express.js", "Socket.io"],
+        "Developed a collaborative task management tool using the MERN stack, enabling real-time project updates and team interactions through Socket.io for instant communication.",
+      tech: ["React", "Redux", "Express.js", "Socket.io", "MongoDB"],
       github: "https://github.com/olehtatar/task-manager",
       demo: "https://taskmanager-demo.netlify.app"
     },
     {
       name: "Personal Blog Platform",
       description:
-        "A full-featured blogging platform with a Markdown editor, comments, and an admin dashboard for content management.",
+        "Built a full-featured blogging platform with Next.js, featuring a Markdown editor for content creation, a comment system for user engagement, and a GraphQL API for efficient data management.",
       tech: ["Next.js", "TypeScript", "GraphQL", "PostgreSQL"],
       github: "https://github.com/olehtatar/blog-platform",
       demo: "https://blog-platform-demo.vercel.app"
+    }
+  ];
+
+  const competencies = [
+    {
+      icon: <BrainCircuit className="w-5 h-5 text-primary" />,
+      title: "Problem-Solving",
+      description:
+        "Deconstructed complex user requirements into clean, scalable, and maintainable code solutions across multiple projects."
     },
     {
-      name: "Real-Time Chat Application",
+      icon: <Users className="w-5 h-5 text-primary" />,
+      title: "Team Collaboration",
       description:
-        "A web-based chat application supporting private and group messaging, built with WebSockets for instant communication.",
-      tech: ["React", "Node.js", "WebSocket", "Redis"],
-      github: "https://github.com/olehtatar/real-time-chat",
-      demo: "https://chat-app-demo.netlify.app"
+        "Thrived in agile environments, utilizing Git for version control and participating in code reviews to ensure high-quality standards."
+    },
+    {
+      icon: <MessageCircle className="w-5 h-5 text-primary" />,
+      title: "Effective Communication",
+      description:
+        "Articulated technical concepts and project progress clearly to both technical and non-technical stakeholders."
+    },
+    {
+      icon: <Zap className="w-5 h-5 text-primary" />,
+      title: "Adaptability",
+      description:
+        "Quickly learned and applied new technologies, including GraphQL and WebSockets, to meet project-specific needs."
     }
   ];
 
   return (
     <div className="col-span-1 lg:col-span-2 p-8 lg:p-10 bg-background">
+      {/* Summary Section */}
       <section className="p-6 border rounded-lg shadow-sm mb-8">
         <h2 className="text-2xl font-bold text-primary mb-4 flex items-center">
           <User className="w-6 h-6 mr-3" />
-          About Me
+          Summary
         </h2>
         <p className="text-muted-foreground leading-relaxed">
-          Passionate Fullstack Developer with expertise in the MERN stack and
-          TypeScript. A recent graduate of the intensive GoIT Academy program, I
-          am committed to writing clean, efficient code and creating exceptional
-          user experiences. I am eager to contribute to innovative projects and
-          grow within a dynamic tech team.
+          Results-oriented Full-Stack Developer and recent GoIT Academy graduate
+          with hands-on experience in the MERN stack and TypeScript. Proven
+          ability to build and deploy scalable web applications, demonstrated
+          through multiple full-cycle projects. Eager to apply strong
+          problem-solving skills and a passion for clean, efficient code to
+          contribute to a dynamic tech team.
         </p>
       </section>
 
+      {/* Projects Section */}
       <section className="p-6 border rounded-lg shadow-sm mb-8">
         <h2 className="text-2xl font-bold text-primary mb-6 flex items-center">
           <Code className="w-6 h-6 mr-3" />
@@ -64,8 +116,8 @@ const ResumeMain = () => {
               key={index}
               className={index < projects.length - 1 ? "border-b pb-6" : ""}
             >
-              <div className="flex justify-between items-baseline mb-2">
-                <h3 className="text-xl font-semibold">{project.name}</h3>
+              <div className="flex justify-between items-center mb-2">
+                <h3 className="text-lg font-semibold">{project.name}</h3>
                 <div className="flex gap-4">
                   <a
                     href={project.github}
@@ -85,19 +137,44 @@ const ResumeMain = () => {
                   </a>
                 </div>
               </div>
-              <p className="text-muted-foreground mb-3 leading-relaxed">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 mb-3">
                 {project.tech.map((tech, techIndex) => (
-                  <Badge key={techIndex}>{tech}</Badge>
+                  <Badge
+                    key={techIndex}
+                    variant="outline"
+                    className="font-normal"
+                  >
+                    {tech}
+                  </Badge>
                 ))}
               </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {project.description}
+              </p>
             </div>
           ))}
         </div>
       </section>
 
+      {/* Core Competencies Section */}
+      <section className="p-6 border rounded-lg shadow-sm mb-8">
+        <h2 className="text-2xl font-bold text-primary mb-6 flex items-center">
+          <Zap className="w-6 h-6 mr-3" />
+          Core Competencies
+        </h2>
+        <div className="space-y-4">
+          {competencies.map((skill, index) => (
+            <CompetencyItem
+              key={index}
+              icon={skill.icon}
+              title={skill.title}
+              description={skill.description}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Education Section */}
       <section className="p-6 border rounded-lg shadow-sm">
         <h2 className="text-2xl font-bold text-primary mb-6 flex items-center">
           <GraduationCap className="w-6 h-6 mr-3" />
@@ -106,38 +183,35 @@ const ResumeMain = () => {
         <div>
           <div className="flex justify-between items-baseline mb-2">
             <h3 className="text-xl font-semibold">
-              Fullstack Developer Certificate
+              Full-Stack Developer Certificate
             </h3>
-            <div className="text-sm text-muted-foreground">10/07/2025</div>
+            <div className="text-sm text-muted-foreground">July 2025</div>
           </div>
           <h4 className="text-lg font-medium text-primary mb-3">
-            GoIT Academy (ID: 39063)
+            GoIT Academy
           </h4>
           <p className="text-muted-foreground leading-relaxed mb-4">
-            A comprehensive 10-month program (680+ hours) covering modern web
-            technologies and best practices through hands-on projects, including
-            3 team projects and 30+ technical assignments.
+            Completed a comprehensive 10-month program (680+ hours) focused on
+            modern web technologies, developing 3 team projects and over 30
+            technical assignments.
           </p>
           <ul className="list-disc list-inside text-muted-foreground space-y-1 text-sm">
             <li>
-              <span className="font-semibold">HTML+CSS:</span> Responsive
-              Design, Flexbox, Forms.
+              <span className="font-semibold">Core Technologies:</span> HTML,
+              CSS, Responsive Design, JavaScript (ES6+), DOM.
             </li>
             <li>
-              <span className="font-semibold">JavaScript:</span> ES6+, DOM,
-              Asynchrony (Promises, async/await), HTTP requests.
+              <span className="font-semibold">Frontend:</span> React
+              (Components, Hooks, State Management with Redux), TypeScript
+              basics.
             </li>
             <li>
-              <span className="font-semibold">React:</span> Components, Hooks,
-              State Management (Redux), Routing.
+              <span className="font-semibold">Backend:</span> Node.js, Express,
+              REST API development, MongoDB, JWT Authentication.
             </li>
             <li>
-              <span className="font-semibold">Node.js:</span> Express, REST API,
-              MongoDB, Authentication (JWT), Docker.
-            </li>
-            <li>
-              <span className="font-semibold">TypeScript:</span> Typification
-              basics with React.
+              <span className="font-semibold">Developer Tools:</span> Git,
+              Docker, Agile Methodologies.
             </li>
           </ul>
         </div>
