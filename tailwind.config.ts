@@ -52,6 +52,14 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				resume: {
+					sidebar: 'hsl(var(--resume-sidebar))',
+					'sidebar-foreground': 'hsl(var(--resume-sidebar-foreground))',
+					accent: 'hsl(var(--resume-accent))',
+					section: 'hsl(var(--resume-section))',
+					text: 'hsl(var(--resume-text))',
+					muted: 'hsl(var(--resume-muted))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
