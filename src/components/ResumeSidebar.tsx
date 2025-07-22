@@ -1,163 +1,137 @@
-import { Mail, Phone, MapPin, Github, Linkedin, Globe, Calendar, Award } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Github,
+  Linkedin,
+  Globe,
+  MessageSquare,
+  Wrench,
+  Languages
+} from "lucide-react";
 
 const ResumeSidebar = () => {
-  const frontendSkills = [
-    "React", "TypeScript", "JavaScript", "HTML5", "CSS3", 
-    "Redux Toolkit", "React Router", "Tailwind CSS", "Responsive Design"
-  ];
+  const techSkills = {
+    Frontend:
+      "React, TypeScript, JavaScript (ES6+), HTML5 & CSS3, Tailwind CSS, Redux Toolkit",
+    Backend: "Node.js, Express.js, MongoDB, REST API, JWT",
+    Tools: "Git, GitHub, Docker, Vite, Postman, Swagger"
+  };
 
-  const backendSkills = [
-    "Node.js", "Express.js", "MongoDB", "REST API", 
-    "Authentication", "JWT", "Docker", "Swagger"
-  ];
-
-  const tools = [
-    "Git", "GitHub", "Vite", "Webpack", "Postman", "VS Code"
-  ];
+  const softSkills =
+    "Team Collaboration, Agile Methodologies, Problem-Solving, Effective Communication, Adaptability";
 
   return (
-    <div className="bg-resume-sidebar p-6 text-resume-sidebar-foreground min-h-screen lg:min-h-screen print:min-h-screen">
+    <div className="bg-secondary/50 p-8 lg:p-10 text-secondary-foreground space-y-8">
       {/* Profile */}
-      <div className="mb-8 text-center">
-        <div className="w-32 h-32 bg-resume-accent rounded-full mx-auto mb-4 flex items-center justify-center">
-          <span className="text-4xl font-bold text-resume-text">OT</span>
+      <div className="text-center">
+        <div className="w-32 h-32 bg-primary/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+          <span className="text-4xl font-bold text-primary">OT</span>
         </div>
-        <h1 className="text-2xl font-bold mb-2">Oleh Tatarynov</h1>
-        <p className="text-lg opacity-90">Fullstack Developer</p>
+        <h1 className="text-3xl font-bold mb-1">Oleh Tatarynov</h1>
+        <p className="text-lg text-muted-foreground">Fullstack Developer</p>
       </div>
 
       {/* Contact */}
-      <Card className="mb-6 bg-white/10 border-white/20">
-        <CardContent className="p-4">
-          <h2 className="text-lg font-semibold mb-4 flex items-center">
-            <Mail className="w-5 h-5 mr-2" />
-            Contact
-          </h2>
-          <div className="space-y-3 text-sm">
-            <div className="flex items-center">
-              <Mail className="w-4 h-4 mr-3 opacity-70" />
-              <span>oleh.tatarynov@gmail.com</span>
-            </div>
-            <div className="flex items-center">
-              <Phone className="w-4 h-4 mr-3 opacity-70" />
-              <span>+380 XX XXX XX XX</span>
-            </div>
-            <div className="flex items-center">
-              <MapPin className="w-4 h-4 mr-3 opacity-70" />
-              <span>Kyiv, Ukraine</span>
-            </div>
-            <div className="flex items-center">
-              <Github className="w-4 h-4 mr-3 opacity-70" />
-              <span>github.com/olehtatar</span>
-            </div>
-            <div className="flex items-center">
-              <Linkedin className="w-4 h-4 mr-3 opacity-70" />
-              <span>linkedin.com/in/olehtatar</span>
-            </div>
-            <div className="flex items-center">
-              <Globe className="w-4 h-4 mr-3 opacity-70" />
-              <span>olehtatar.dev</span>
-            </div>
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold flex items-center text-primary">
+          <Mail className="w-5 h-5 mr-3" />
+          Contact
+        </h2>
+        <div className="space-y-3 text-sm pt-2">
+          <a
+            href="mailto:oleh.tatarynov@gmail.com"
+            className="flex items-center hover:text-primary transition-colors"
+          >
+            <Mail className="w-4 h-4 mr-3 text-muted-foreground" />
+            <span>oleh.tatarynov@gmail.com</span>
+          </a>
+          <div className="flex items-center">
+            <Phone className="w-4 h-4 mr-3 text-muted-foreground" />
+            <span>+380 XX XXX XX XX</span>
           </div>
-        </CardContent>
-      </Card>
+          <div className="flex items-center">
+            <MapPin className="w-4 h-4 mr-3 text-muted-foreground" />
+            <span>Kyiv, Ukraine</span>
+          </div>
+          <a
+            href="https://github.com/olehtatar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center hover:text-primary transition-colors"
+          >
+            <Github className="w-4 h-4 mr-3 text-muted-foreground" />
+            <span>github.com/olehtatar</span>
+          </a>
+          <a
+            href="https://linkedin.com/in/olehtatar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center hover:text-primary transition-colors"
+          >
+            <Linkedin className="w-4 h-4 mr-3 text-muted-foreground" />
+            <span>linkedin.com/in/olehtatar</span>
+          </a>
+          <a
+            href="https://olehtatar.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center hover:text-primary transition-colors"
+          >
+            <Globe className="w-4 h-4 mr-3 text-muted-foreground" />
+            <span>olehtatar.dev</span>
+          </a>
+        </div>
+      </div>
 
-      {/* Frontend Skills */}
-      <Card className="mb-6 bg-white/10 border-white/20">
-        <CardContent className="p-4">
-          <h2 className="text-lg font-semibold mb-4">Frontend</h2>
-          <div className="flex flex-wrap gap-2">
-            {frontendSkills.map((skill, index) => (
-              <Badge 
-                key={index} 
-                variant="secondary" 
-                className="bg-white/20 text-resume-sidebar-foreground border-white/30 hover:bg-white/30 text-xs"
-              >
-                {skill}
-              </Badge>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+      {/* Technical Skills */}
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold flex items-center text-primary">
+          <Wrench className="w-5 h-5 mr-3" />
+          Technical Skills
+        </h2>
+        <div className="space-y-4 pt-2">
+          {Object.entries(techSkills).map(([category, skills]) => (
+            <div key={category}>
+              <h3 className="text-md font-semibold mb-1">{category}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {skills}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
 
-      {/* Backend Skills */}
-      <Card className="mb-6 bg-white/10 border-white/20">
-        <CardContent className="p-4">
-          <h2 className="text-lg font-semibold mb-4">Backend</h2>
-          <div className="flex flex-wrap gap-2">
-            {backendSkills.map((skill, index) => (
-              <Badge 
-                key={index} 
-                variant="secondary" 
-                className="bg-white/20 text-resume-sidebar-foreground border-white/30 hover:bg-white/30 text-xs"
-              >
-                {skill}
-              </Badge>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Tools */}
-      <Card className="mb-6 bg-white/10 border-white/20">
-        <CardContent className="p-4">
-          <h2 className="text-lg font-semibold mb-4">Tools & Others</h2>
-          <div className="flex flex-wrap gap-2">
-            {tools.map((tool, index) => (
-              <Badge 
-                key={index} 
-                variant="secondary" 
-                className="bg-white/20 text-resume-sidebar-foreground border-white/30 hover:bg-white/30 text-xs"
-              >
-                {tool}
-              </Badge>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+      {/* Soft Skills */}
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold flex items-center text-primary">
+          <MessageSquare className="w-5 h-5 mr-3" />
+          Soft Skills
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed pt-2">
+          {softSkills}
+        </p>
+      </div>
 
       {/* Languages */}
-      <Card className="mb-6 bg-white/10 border-white/20">
-        <CardContent className="p-4">
-          <h2 className="text-lg font-semibold mb-4">Languages</h2>
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm">Ukrainian</span>
-              <Badge variant="outline" className="border-white/30 text-resume-sidebar-foreground text-xs">
-                Native
-              </Badge>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm">English</span>
-              <Badge variant="outline" className="border-white/30 text-resume-sidebar-foreground text-xs">
-                B2
-              </Badge>
-            </div>
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold flex items-center text-primary">
+          <Languages className="w-5 h-5 mr-3" />
+          Languages
+        </h2>
+        <div className="space-y-2 pt-2">
+          <div className="flex justify-between items-center text-sm">
+            <span>Ukrainian</span>
+            <span className="text-muted-foreground">Native</span>
           </div>
-        </CardContent>
-      </Card>
-
-      {/* Education */}
-      <Card className="bg-white/10 border-white/20">
-        <CardContent className="p-4">
-          <h2 className="text-lg font-semibold mb-4 flex items-center">
-            <Award className="w-5 h-5 mr-2" />
-            Education
-          </h2>
-          <div className="space-y-3 text-sm">
-            <div>
-              <div className="font-medium">Fullstack Developer</div>
-              <div className="text-xs opacity-75">GoIT Academy</div>
-              <div className="flex items-center text-xs opacity-75 mt-1">
-                <Calendar className="w-3 h-3 mr-1" />
-                <span>2025</span>
-              </div>
-            </div>
+          <div className="flex justify-between items-center text-sm">
+            <span>English</span>
+            <span className="text-muted-foreground">
+              Upper-Intermediate (B2)
+            </span>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };

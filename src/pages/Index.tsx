@@ -3,11 +3,11 @@ import ResumeMain from "@/components/ResumeMain";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-background">
-      <div className="w-full lg:w-80 flex-shrink-0 print:w-80">
+    <div className="bg-muted/40 min-h-screen p-4 sm:p-8 md:p-12 lg:p-16">
+      <div className="resume-container max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 bg-background shadow-2xl rounded-2xl overflow-hidden">
         <ResumeSidebar />
+        <ResumeMain />
       </div>
-      <ResumeMain />
     </div>
   );
 };
