@@ -8,7 +8,7 @@ import {
   Wrench,
   Languages
 } from "lucide-react";
-import { ThemeSwitcher } from "./ThemeSwitcher"; // Імпортуємо перемикач тем
+// import { ThemeSwitcher } from "./ThemeSwitcher"; // Імпортуємо перемикач тем
 
 const ResumeSidebar = () => {
   const techSkills = {
@@ -29,7 +29,7 @@ const ResumeSidebar = () => {
           <div className="w-32 h-32 bg-primary/20 rounded-full mx-auto mb-4 flex items-center justify-center">
             <span className="text-4xl font-bold text-primary">OT</span>
           </div>
-          <h1 className="text-3xl font-bold mb-1">Oleh Tatarynov</h1>
+          <h1 className="text-4xl font-bold mb-1">Oleh Tatarynov</h1>
           <p className="text-lg text-muted-foreground">Full-Stack Developer</p>
         </div>
 
@@ -125,7 +125,7 @@ const ResumeSidebar = () => {
       </div>
 
       {/* Theme Switcher */}
-      <ThemeSwitcher />
+      {/* <ThemeSwitcher /> */}
     </div>
   );
 };
