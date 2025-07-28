@@ -40,37 +40,49 @@
 @media print {
   @page {
     size: A4;
+    margin: 0; /* Прибираємо стандартні відступи браузера при друку */
+  }
+
+  html,
+  body {
+    width: 210mm; /* Ширина A4 */
+    height: 100%; /* Дозволяємо контенту визначати висоту */
     margin: 0;
+    padding: 0;
+    background: #fff; /* Забезпечуємо білий фон, ігноруючи теми */
   }
 
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    -webkit-font-smoothing: antialiased;
+    box-shadow: none !important; /* Прибираємо всі тіні для чистого друку */
   }
 
   .resume-container {
     display: grid !important;
     grid-template-columns: 320px 1fr !important;
-    width: 210mm;
-    height: 297mm;
-    overflow: hidden;
+    width: 100% !important;
+    max-width: 100% !important;
+
+    /* КЛЮЧОВІ ЗМІНИ: Видаляємо фіксовану висоту та overflow */
+    height: auto !important;
+    min-height: 297mm; /* Мінімальна висота першої сторінки A4 */
+    overflow: visible !important;
+
+    border-radius: 0 !important;
+    border: none !important;
   }
 
+  /* Уникаємо розривів сторінок всередині секцій */
+  section,
   .project-item,
-  .experience-item,
-  .education-section,
-  .summary-section,
-  .skills-section {
+  .experience-item {
     page-break-inside: avoid;
   }
 
-  .download-button {
+  /* Ховаємо непотрібні елементи, наприклад, перемикач тем */
+  .download-button,
+  .theme-switcher {
     display: none !important;
   }
 }
