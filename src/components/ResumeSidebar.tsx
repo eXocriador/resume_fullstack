@@ -10,6 +10,11 @@ import {
 } from "lucide-react";
 // import { ThemeSwitcher } from "./ThemeSwitcher"; // Імпортуємо перемикач тем
 
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
+import { ResumePDF } from "./ResumePDF"; // Імпортуємо наш PDF компонент
+
 const ResumeSidebar = () => {
   const techSkills = {
     "Programming Languages": "TypeScript, JavaScript (ES6+)",
@@ -126,6 +131,19 @@ const ResumeSidebar = () => {
 
       {/* Theme Switcher */}
       {/* <ThemeSwitcher /> */}
+      <div className="p-4 mt-auto">
+        <PDFDownloadLink
+          document={<ResumePDF />}
+          fileName="Oleh_Tatarynov_Resume.pdf"
+        >
+          {({ loading }) => (
+            <Button className="w-full" disabled={loading}>
+              <Download className="mr-2 h-4 w-4" />
+              {loading ? "Generating PDF..." : "Download PDF"}
+            </Button>
+          )}
+        </PDFDownloadLink>
+      </div>
     </div>
   );
 };
