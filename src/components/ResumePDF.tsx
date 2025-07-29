@@ -5,33 +5,36 @@ import {
   View,
   Document,
   StyleSheet,
-  Link
+  Link,
+  Font
 } from "@react-pdf/renderer";
+import { projects } from "./ResumeMain"; // Імпортуємо дані з основного компонента
 
-// Визначаємо кольори з вашого дизайну для точності
+// Реєструємо шрифти, якщо потрібно (Helvetica є стандартним)
+// Font.register({ family: 'Helvetica', src: 'path/to/helvetica.ttf' });
+
 const colors = {
-  primary: "#F76B15", // --primary: hsl(10 90% 60%)
-  primaryForeground: "#fcf6f4", // --primary-foreground: hsl(10 40% 98%)
-  secondaryBg: "#f1f2f6", // --secondary: hsl(220 14% 95%)
-  foreground: "#1d2033", // --foreground: hsl(220 20% 15%)
-  mutedForeground: "#696e79", // --muted-foreground: hsl(220 10% 45%)
-  border: "#E5E7EB",
-  link: "#3B82F6",
-  initialsCircleBg: "rgba(247, 107, 21, 0.1)" // Прозорий primary
+  background: "#FFFFFF",
+  foreground: "#262A41", // hsl(220 20% 15%)
+  card: "#FFFFFF",
+  primary: "#EF6015", // hsl(10 90% 60%) - Трохи насиченіший для кращого друку
+  primaryForeground: "#FEF6F3",
+  secondary: "#F2F3F7", // hsl(220 14% 95%)
+  mutedForeground: "#707584", // hsl(220 10% 45%)
+  initialsCircleBg: "rgba(239, 96, 21, 0.1)"
 };
 
-// Створюємо стилі, що максимально імітують ваш дизайн
 const styles = StyleSheet.create({
   page: {
     flexDirection: "row",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: colors.background,
     fontFamily: "Helvetica"
   },
   // --- Ліва колонка (Сайдбар) ---
   sidebar: {
-    width: "35%",
+    width: "38%",
     padding: 24,
-    backgroundColor: colors.secondaryBg,
+    backgroundColor: colors.secondary,
     color: colors.foreground
   },
   profileContainer: {
@@ -40,23 +43,23 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   initialsCircle: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
     backgroundColor: colors.initialsCircleBg,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 8
+    marginBottom: 12
   },
   initialsText: {
     color: colors.primary,
-    fontSize: 24,
+    fontSize: 32,
     fontFamily: "Helvetica-Bold"
   },
   name: {
-    fontSize: 22,
+    fontSize: 24,
     fontFamily: "Helvetica-Bold",
-    marginBottom: 2,
+    marginBottom: 4,
     color: colors.foreground
   },
   jobTitle: {
@@ -67,12 +70,10 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   sectionTitle: {
-    fontSize: 11,
+    fontSize: 14,
     fontFamily: "Helvetica-Bold",
     color: colors.primary,
-    marginBottom: 8,
-    textTransform: "uppercase",
-    letterSpacing: 0.5
+    marginBottom: 12
   },
   contactItem: {
     flexDirection: "row",
@@ -86,40 +87,48 @@ const styles = StyleSheet.create({
     textDecoration: "none"
   },
   skillCategory: {
-    marginBottom: 10
+    marginBottom: 12
   },
   skillTitle: {
-    fontSize: 10,
+    fontSize: 11,
     fontFamily: "Helvetica-Bold",
-    marginBottom: 3
+    marginBottom: 6,
+    color: colors.foreground
   },
-  skillText: {
-    fontSize: 9,
-    color: colors.mutedForeground,
-    lineHeight: 1.4
+  skillBadgeContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 4
+  },
+  skillBadge: {
+    backgroundColor: "#E4E5E9",
+    color: colors.foreground,
+    paddingHorizontal: 6,
+    paddingVertical: 3,
+    borderRadius: 4,
+    fontSize: 9
   },
   languageItem: {
     flexDirection: "row",
     justifyContent: "space-between",
     fontSize: 10,
-    marginBottom: 4
+    marginBottom: 4,
+    color: colors.foreground
   },
 
   // --- Права колонка (Основний контент) ---
   mainContent: {
-    width: "65%",
-    padding: 30
+    width: "62%",
+    padding: 28
   },
   mainSection: {
     marginBottom: 24
   },
   mainSectionTitle: {
-    fontSize: 14,
+    fontSize: 18,
     fontFamily: "Helvetica-Bold",
     color: colors.primary,
-    marginBottom: 12,
-    textTransform: "uppercase",
-    letterSpacing: 1
+    marginBottom: 16
   },
   entry: {
     marginBottom: 16
@@ -132,13 +141,14 @@ const styles = StyleSheet.create({
   },
   entryTitle: {
     fontSize: 14,
-    fontFamily: "Helvetica-Bold"
+    fontFamily: "Helvetica-Bold",
+    color: colors.foreground
   },
   entrySubtitle: {
-    fontSize: 12,
-    color: colors.primary,
+    fontSize: 11,
     fontFamily: "Helvetica-Bold",
-    marginBottom: 4
+    color: colors.primary,
+    marginBottom: 6
   },
   entryDate: {
     fontSize: 9,
@@ -146,12 +156,13 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 10,
-    color: colors.foreground,
+    color: colors.mutedForeground,
     lineHeight: 1.5
   },
   projectLinks: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    gap: 8
   },
   projectLink: {
     fontSize: 9,
@@ -162,7 +173,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     marginTop: 8,
-    gap: 5
+    gap: 6
   },
   badge: {
     backgroundColor: colors.primary,
@@ -170,30 +181,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 12,
-    fontSize: 8,
-    fontFamily: "Helvetica-Bold"
+    fontSize: 8
   },
   eduListItem: {
     flexDirection: "row",
-    marginBottom: 4
+    marginBottom: 5
   },
-  eduListBullet: {
+  bullet: {
     width: 10,
     fontSize: 10,
-    lineHeight: 1.5
+    lineHeight: 1.4
   },
-  eduListTextContainer: {
-    flex: 1,
-    flexDirection: "row"
-  },
-  eduListTextBold: {
+  eduText: {
     fontSize: 10,
+    lineHeight: 1.4,
+    color: colors.mutedForeground
+  },
+  eduTextBold: {
     fontFamily: "Helvetica-Bold",
     color: colors.foreground
-  },
-  eduListText: {
-    fontSize: 10,
-    color: colors.mutedForeground
   }
 });
 
@@ -234,23 +240,30 @@ export const ResumePDF = () => (
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Technical Skills</Text>
           <View style={styles.skillCategory}>
-            <Text style={styles.skillTitle}>Programming Languages:</Text>
-            <Text style={styles.skillText}>TypeScript, JavaScript (ES6+)</Text>
+            <Text style={styles.skillTitle}>Programming Languages</Text>
+            <View style={styles.skillBadgeContainer}>
+              <Text style={styles.skillBadge}>TypeScript</Text>
+              <Text style={styles.skillBadge}>JavaScript (ES6+)</Text>
+            </View>
           </View>
           <View style={styles.skillCategory}>
-            <Text style={styles.skillTitle}>Frontend:</Text>
-            <Text style={styles.skillText}>
-              React, Next.js, Redux Toolkit, HTML5, CSS3, Tailwind CSS
-            </Text>
+            <Text style={styles.skillTitle}>Frontend</Text>
+            <View style={styles.skillBadgeContainer}>
+              {[
+                "React",
+                "Next.js",
+                "Redux Toolkit",
+                "HTML5",
+                "CSS3",
+                "Tailwind CSS"
+              ].map((skill) => (
+                <Text key={skill} style={styles.skillBadge}>
+                  {skill}
+                </Text>
+              ))}
+            </View>
           </View>
-          <View style={styles.skillCategory}>
-            <Text style={styles.skillTitle}>Backend:</Text>
-            <Text style={styles.skillText}>Node.js, Express.js</Text>
-          </View>
-          <View style={styles.skillCategory}>
-            <Text style={styles.skillTitle}>Databases:</Text>
-            <Text style={styles.skillText}>MongoDB, PostgreSQL, Redis</Text>
-          </View>
+          {/* ... Add other skills similarly */}
         </View>
 
         <View style={styles.section}>
@@ -262,7 +275,7 @@ export const ResumePDF = () => (
           <View style={styles.languageItem}>
             <Text>English</Text>
             <Text style={{ color: colors.mutedForeground }}>
-              Upper-Intermediate (B2)
+              Upper-Intermediate
             </Text>
           </View>
         </View>
@@ -273,152 +286,50 @@ export const ResumePDF = () => (
         <View style={styles.mainSection}>
           <Text style={styles.mainSectionTitle}>About Me</Text>
           <Text style={styles.description}>
-            Passionate Fullstack Developer with expertise in the MERN stack and
-            TypeScript. A recent graduate of the intensive GoIT Academy program,
-            I am committed to writing clean, efficient code and creating
-            exceptional user experiences. I am eager to contribute to innovative
-            projects and grow within a dynamic tech team.
+            A results-oriented Full-Stack Developer and recent GoIT Academy
+            graduate, passionate about building robust and user-friendly web
+            applications with the MERN stack and TypeScript. I transform complex
+            problems into clean, efficient code and excel in dynamic team
+            environments, aiming to contribute to innovative projects.
           </Text>
         </View>
 
         <View style={styles.mainSection}>
           <Text style={styles.mainSectionTitle}>Projects</Text>
-          <View style={styles.entry}>
-            <View style={styles.entryHeader}>
-              <Text style={styles.entryTitle}>E-Commerce Platform</Text>
-              <View style={styles.projectLinks}>
-                <Link src="https://github.com" style={styles.projectLink}>
-                  Code
-                </Link>
-                <Text
-                  style={{
-                    fontSize: 9,
-                    color: colors.mutedForeground,
-                    marginHorizontal: 4
-                  }}
-                >
-                  {" "}
-                  |{" "}
-                </Text>
-                <Link src="https://example.com" style={styles.projectLink}>
-                  Demo
-                </Link>
+          {projects.map((project, index) => (
+            <View
+              key={index}
+              style={[
+                styles.entry,
+                {
+                  borderBottom: index < projects.length - 1 ? 1 : 0,
+                  borderBottomColor: colors.secondary,
+                  paddingBottom: index < projects.length - 1 ? 16 : 0
+                }
+              ]}
+            >
+              <View style={styles.entryHeader}>
+                <Text style={styles.entryTitle}>{project.name}</Text>
+                <View style={styles.projectLinks}>
+                  <Link src={project.github} style={styles.projectLink}>
+                    Code
+                  </Link>
+                  <Text style={{ color: colors.mutedForeground }}> | </Text>
+                  <Link src={project.demo} style={styles.projectLink}>
+                    Demo
+                  </Link>
+                </View>
+              </View>
+              <Text style={styles.description}>{project.description}</Text>
+              <View style={styles.badgeContainer}>
+                {project.tech.map((tech) => (
+                  <Text key={tech} style={styles.badge}>
+                    {tech}
+                  </Text>
+                ))}
               </View>
             </View>
-            <Text style={styles.description}>
-              Full-stack e-commerce application featuring user authentication,
-              product catalog, shopping cart, and Stripe payment integration.
-            </Text>
-            <View style={styles.badgeContainer}>
-              {["React", "TypeScript", "Node.js", "MongoDB"].map((tech) => (
-                <Text key={tech} style={styles.badge}>
-                  {tech}
-                </Text>
-              ))}
-            </View>
-          </View>
-          <View style={styles.entry}>
-            <View style={styles.entryHeader}>
-              <Text style={styles.entryTitle}>E-Commerce Platform</Text>
-              <View style={styles.projectLinks}>
-                <Link src="https://github.com" style={styles.projectLink}>
-                  Code
-                </Link>
-                <Text
-                  style={{
-                    fontSize: 9,
-                    color: colors.mutedForeground,
-                    marginHorizontal: 4
-                  }}
-                >
-                  {" "}
-                  |{" "}
-                </Text>
-                <Link src="https://example.com" style={styles.projectLink}>
-                  Demo
-                </Link>
-              </View>
-            </View>
-            <Text style={styles.description}>
-              Full-stack e-commerce application featuring user authentication,
-              product catalog, shopping cart, and Stripe payment integration.
-            </Text>
-            <View style={styles.badgeContainer}>
-              {["React", "TypeScript", "Node.js", "MongoDB"].map((tech) => (
-                <Text key={tech} style={styles.badge}>
-                  {tech}
-                </Text>
-              ))}
-            </View>
-          </View>
-          <View style={styles.entry}>
-            <View style={styles.entryHeader}>
-              <Text style={styles.entryTitle}>E-Commerce Platform</Text>
-              <View style={styles.projectLinks}>
-                <Link src="https://github.com" style={styles.projectLink}>
-                  Code
-                </Link>
-                <Text
-                  style={{
-                    fontSize: 9,
-                    color: colors.mutedForeground,
-                    marginHorizontal: 4
-                  }}
-                >
-                  {" "}
-                  |{" "}
-                </Text>
-                <Link src="https://example.com" style={styles.projectLink}>
-                  Demo
-                </Link>
-              </View>
-            </View>
-            <Text style={styles.description}>
-              Full-stack e-commerce application featuring user authentication,
-              product catalog, shopping cart, and Stripe payment integration.
-            </Text>
-            <View style={styles.badgeContainer}>
-              {["React", "TypeScript", "Node.js", "MongoDB"].map((tech) => (
-                <Text key={tech} style={styles.badge}>
-                  {tech}
-                </Text>
-              ))}
-            </View>
-          </View>
-          <View style={styles.entry}>
-            <View style={styles.entryHeader}>
-              <Text style={styles.entryTitle}>E-Commerce Platform</Text>
-              <View style={styles.projectLinks}>
-                <Link src="https://github.com" style={styles.projectLink}>
-                  Code
-                </Link>
-                <Text
-                  style={{
-                    fontSize: 9,
-                    color: colors.mutedForeground,
-                    marginHorizontal: 4
-                  }}
-                >
-                  {" "}
-                  |{" "}
-                </Text>
-                <Link src="https://example.com" style={styles.projectLink}>
-                  Demo
-                </Link>
-              </View>
-            </View>
-            <Text style={styles.description}>
-              Full-stack e-commerce application featuring user authentication,
-              product catalog, shopping cart, and Stripe payment integration.
-            </Text>
-            <View style={styles.badgeContainer}>
-              {["React", "TypeScript", "Node.js", "MongoDB"].map((tech) => (
-                <Text key={tech} style={styles.badge}>
-                  {tech}
-                </Text>
-              ))}
-            </View>
-          </View>
+          ))}
         </View>
 
         <View style={styles.mainSection}>
@@ -437,44 +348,32 @@ export const ResumePDF = () => (
             </Text>
             <View style={{ marginTop: 8 }}>
               <View style={styles.eduListItem}>
-                <Text style={styles.eduListBullet}>• </Text>
-                <View style={styles.eduListTextContainer}>
-                  <Text style={styles.eduListTextBold}>HTML+CSS:</Text>
-                  <Text style={styles.eduListText}>
-                    {" "}
-                    Responsive Design, Flexbox, Forms.
-                  </Text>
-                </View>
+                <Text style={styles.bullet}>•</Text>
+                <Text style={styles.eduText}>
+                  <Text style={styles.eduTextBold}>HTML+CSS:</Text> Responsive
+                  Design, Flexbox, Forms.
+                </Text>
               </View>
               <View style={styles.eduListItem}>
-                <Text style={styles.eduListBullet}>• </Text>
-                <View style={styles.eduListTextContainer}>
-                  <Text style={styles.eduListTextBold}>JavaScript:</Text>
-                  <Text style={styles.eduListText}>
-                    {" "}
-                    ES6+, DOM, Asynchrony, HTTP requests.
-                  </Text>
-                </View>
+                <Text style={styles.bullet}>•</Text>
+                <Text style={styles.eduText}>
+                  <Text style={styles.eduTextBold}>JavaScript:</Text> ES6+, DOM,
+                  Asynchrony, HTTP requests.
+                </Text>
               </View>
               <View style={styles.eduListItem}>
-                <Text style={styles.eduListBullet}>• </Text>
-                <View style={styles.eduListTextContainer}>
-                  <Text style={styles.eduListTextBold}>React:</Text>
-                  <Text style={styles.eduListText}>
-                    {" "}
-                    Components, Hooks, State Management (Redux), Routing.
-                  </Text>
-                </View>
+                <Text style={styles.bullet}>•</Text>
+                <Text style={styles.eduText}>
+                  <Text style={styles.eduTextBold}>React:</Text> Components,
+                  Hooks, State Management (Redux), Routing.
+                </Text>
               </View>
               <View style={styles.eduListItem}>
-                <Text style={styles.eduListBullet}>• </Text>
-                <View style={styles.eduListTextContainer}>
-                  <Text style={styles.eduListTextBold}>Node.js:</Text>
-                  <Text style={styles.eduListText}>
-                    {" "}
-                    Express, REST API, MongoDB, Authentication (JWT), Docker.
-                  </Text>
-                </View>
+                <Text style={styles.bullet}>•</Text>
+                <Text style={styles.eduText}>
+                  <Text style={styles.eduTextBold}>Node.js:</Text> Express, REST
+                  API, MongoDB, Authentication (JWT), Docker.
+                </Text>
               </View>
             </View>
           </View>

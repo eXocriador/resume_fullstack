@@ -1,55 +1,55 @@
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, GraduationCap, User, Code } from "lucide-react";
 
-const ResumeMain = () => {
-  const projects = [
-    {
-      name: "E-Commerce Platform",
-      description:
-        "Full-stack e-commerce application featuring user authentication, product catalog, shopping cart, and Stripe payment integration.",
-      tech: ["React", "TypeScript", "Node.js", "MongoDB"],
-      github: "https://github.com/olehtatar/ecommerce-app",
-      demo: "https://ecommerce-demo.vercel.app"
-    },
-    {
-      name: "Task Management App",
-      description:
-        "A collaborative tool with real-time updates, team features, and project tracking, built with the MERN stack and Socket.io.",
-      tech: ["React", "Redux", "Express.js", "Socket.io"],
-      github: "https://github.com/olehtatar/task-manager",
-      demo: "https://taskmanager-demo.netlify.app"
-    },
-    {
-      name: "Personal Blog Platform",
-      description:
-        "A full-featured blogging platform with a Markdown editor, comments, and an admin dashboard for content management.",
-      tech: ["Next.js", "TypeScript", "GraphQL", "PostgreSQL"],
-      github: "https://github.com/olehtatar/blog-platform",
-      demo: "https://blog-platform-demo.vercel.app"
-    },
-    {
-      name: "Real-Time Chat Application",
-      description:
-        "A web-based chat application supporting private and group messaging, built with WebSockets for instant communication.",
-      tech: ["React", "Node.js", "WebSocket", "Redis"],
-      github: "https://github.com/olehtatar/real-time-chat",
-      demo: "https://chat-app-demo.netlify.app"
-    }
-  ];
+export const projects = [
+  {
+    name: "E-Commerce Platform",
+    description:
+      "Developed a full-stack e-commerce application featuring robust user authentication, a dynamic product catalog, an intuitive shopping cart, and seamless Stripe payment integration.",
+    tech: ["React", "TypeScript", "Node.js", "MongoDB", "Stripe API"],
+    github: "https://github.com/olehtatar/ecommerce-app",
+    demo: "https://ecommerce-demo.vercel.app"
+  },
+  {
+    name: "Task Management App",
+    description:
+      "Built a collaborative tool with real-time updates using Socket.io. Implemented team features and project tracking boards, utilizing the MERN stack for a comprehensive solution.",
+    tech: ["React", "Redux", "Express.js", "Socket.io"],
+    github: "https://github.com/olehtatar/task-manager",
+    demo: "https://taskmanager-demo.netlify.app"
+  },
+  {
+    name: "Personal Blog Platform",
+    description:
+      "Created a full-featured blogging platform with a Markdown editor for rich content creation. Engineered a GraphQL API and a PostgreSQL database for efficient data management.",
+    tech: ["Next.js", "TypeScript", "GraphQL", "PostgreSQL"],
+    github: "https://github.com/olehtatar/blog-platform",
+    demo: "https://blog-platform-demo.vercel.app"
+  },
+  {
+    name: "Real-Time Chat Application",
+    description:
+      "Engineered a web-based chat application supporting private and group messaging. Utilized WebSockets for instant communication and Redis for efficient session handling.",
+    tech: ["React", "Node.js", "WebSocket", "Redis"],
+    github: "https://github.com/olehtatar/real-time-chat",
+    demo: "https://chat-app-demo.netlify.app"
+  }
+];
 
+const ResumeMain = () => {
   return (
-    <div className="col-span-1 lg:col-span-2 p-8 lg:p-10 bg-background">
+    <div className="col-span-1 lg:col-span-2 p-8 lg:p-10 bg-background text-left">
       <section className="p-6 border rounded-lg shadow-sm mb-8">
         <h2 className="text-2xl font-bold text-primary mb-4 flex items-center">
           <User className="w-6 h-6 mr-3" />
           About Me
         </h2>
         <p className="text-muted-foreground leading-relaxed">
-          Passionate Fullstack Developer with expertise in the MERN stack and
-          TypeScript. A recent graduate of the intensive GoIT Academy program, I
-          am committed to writing clean, efficient code and creating exceptional
-          user experiences. I am eager to contribute to innovative projects and
-          grow within a dynamic tech team.
+          A results-oriented Full-Stack Developer and recent GoIT Academy
+          graduate, passionate about building robust and user-friendly web
+          applications with the MERN stack and TypeScript. I transform complex
+          problems into clean, efficient code and excel in dynamic team
+          environments, aiming to contribute to innovative projects.
         </p>
       </section>
 
@@ -120,24 +120,24 @@ const ResumeMain = () => {
           </p>
           <ul className="list-disc list-inside text-muted-foreground space-y-1 text-sm">
             <li>
-              <span className="font-semibold">HTML+CSS:</span> Responsive
-              Design, Flexbox, Forms.
+              <span className="font-semibold text-foreground">HTML+CSS:</span>{" "}
+              Responsive Design, Flexbox, Forms.
             </li>
             <li>
-              <span className="font-semibold">JavaScript:</span> ES6+, DOM,
-              Asynchrony (Promises, async/await), HTTP requests.
+              <span className="font-semibold text-foreground">JavaScript:</span>{" "}
+              ES6+, DOM, Asynchrony (Promises, async/await), HTTP requests.
             </li>
             <li>
-              <span className="font-semibold">React:</span> Components, Hooks,
-              State Management (Redux), Routing.
+              <span className="font-semibold text-foreground">React:</span>{" "}
+              Components, Hooks, State Management (Redux), Routing.
             </li>
             <li>
-              <span className="font-semibold">Node.js:</span> Express, REST API,
-              MongoDB, Authentication (JWT), Docker.
+              <span className="font-semibold text-foreground">Node.js:</span>{" "}
+              Express, REST API, MongoDB, Authentication (JWT), Docker.
             </li>
             <li>
-              <span className="font-semibold">TypeScript:</span> Typification
-              basics with React.
+              <span className="font-semibold text-foreground">TypeScript:</span>{" "}
+              Typification basics with React.
             </li>
           </ul>
         </div>
