@@ -44,15 +44,7 @@ const techSkills = [
   },
   {
     category: "Tools & Platforms",
-    skills: [
-      "Git",
-      "GitHub",
-      "Docker",
-      "Vite",
-      "Postman",
-      "Swagger",
-      "Stripe API"
-    ]
+    skills: ["Git", "GitHub", "Docker", "Vite", "Postman", "Swagger"]
   }
 ];
 
@@ -151,14 +143,18 @@ const ResumeSidebar = () => {
           </h2>
           <div className="space-y-2 pt-2">
             <div className="flex justify-between items-center text-sm">
-              <span>Ukrainian</span>
-              <span className="text-muted-foreground">Native</span>
-            </div>
-            <div className="flex justify-between items-center text-sm">
               <span>English</span>
               <span className="text-muted-foreground">
                 Upper-Intermediate (B2)
               </span>
+            </div>
+            <div className="flex justify-between items-center text-sm">
+              <span>Ukrainian</span>
+              <span className="text-muted-foreground">Native</span>
+            </div>
+            <div className="flex justify-between items-center text-sm">
+              <span>Russian</span>
+              <span className="text-muted-foreground">Native</span>
             </div>
           </div>
         </div>
