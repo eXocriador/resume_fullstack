@@ -1,5 +1,12 @@
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Github, GraduationCap, User, Code } from "lucide-react";
+import {
+  ExternalLink,
+  Github,
+  GraduationCap,
+  User,
+  Code,
+  ArrowRight
+} from "lucide-react";
 
 export const projects = [
   {
@@ -25,14 +32,6 @@ export const projects = [
     tech: ["Next.js", "TypeScript", "GraphQL", "PostgreSQL"],
     github: "https://github.com/olehtatar/blog-platform",
     demo: "https://blog-platform-demo.vercel.app"
-  },
-  {
-    name: "Real-Time Chat Application",
-    description:
-      "Engineered a web-based chat application supporting private and group messaging. Utilized WebSockets for instant communication and Redis for efficient session handling.",
-    tech: ["React", "Node.js", "WebSocket", "Redis"],
-    github: "https://github.com/olehtatar/real-time-chat",
-    demo: "https://chat-app-demo.netlify.app"
   }
 ];
 
@@ -58,13 +57,13 @@ const ResumeMain = () => {
           <Code className="w-6 h-6 mr-3" />
           Projects
         </h2>
-        <div className="space-y-6">
+        <div className="space-y-4">
           {projects.map((project, index) => (
             <div
               key={index}
-              className={index < projects.length - 1 ? "border-b pb-6" : ""}
+              className={index < projects.length - 1 ? "border-b pb-4" : ""}
             >
-              <div className="flex justify-between items-baseline mb-2">
+              <div className="flex justify-between items-baseline mb-1">
                 <h3 className="text-xl font-semibold">{project.name}</h3>
                 <div className="flex gap-4">
                   <a
@@ -85,16 +84,29 @@ const ResumeMain = () => {
                   </a>
                 </div>
               </div>
-              <p className="text-muted-foreground mb-3 leading-relaxed">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 my-2">
                 {project.tech.map((tech, techIndex) => (
-                  <Badge key={techIndex}>{tech}</Badge>
+                  <Badge key={techIndex} variant="secondary">
+                    {tech}
+                  </Badge>
                 ))}
               </div>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                {project.description}
+              </p>
             </div>
           ))}
+        </div>
+        <div className="mt-6 text-center">
+          <a
+            href="https://github.com/exocriador"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-medium text-primary hover:underline inline-flex items-center"
+          >
+            View More Projects on GitHub
+            <ArrowRight className="w-4 h-4 ml-1" />
+          </a>
         </div>
       </section>
 

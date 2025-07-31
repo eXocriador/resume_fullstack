@@ -44,7 +44,15 @@ const techSkills = [
   },
   {
     category: "Tools & Platforms",
-    skills: ["Git", "GitHub", "Docker", "Vite", "Postman", "Swagger"]
+    skills: [
+      "Git",
+      "GitHub",
+      "Docker",
+      "Vite",
+      "Postman",
+      "Swagger",
+      "Stripe API"
+    ]
   }
 ];
 
@@ -125,7 +133,11 @@ const ResumeSidebar = () => {
                 <h3 className="text-md font-semibold mb-2">{category}</h3>
                 <div className="flex flex-wrap gap-2">
                   {skills.map((skill) => (
-                    <Badge key={skill} variant="secondary">
+                    <Badge
+                      key={skill}
+                      variant="outline"
+                      className="font-normal"
+                    >
                       {skill}
                     </Badge>
                   ))}
@@ -143,18 +155,14 @@ const ResumeSidebar = () => {
           </h2>
           <div className="space-y-2 pt-2">
             <div className="flex justify-between items-center text-sm">
-              <span>English</span>
-              <span className="text-muted-foreground">
-                Upper-Intermediate (B2)
-              </span>
-            </div>
-            <div className="flex justify-between items-center text-sm">
               <span>Ukrainian</span>
               <span className="text-muted-foreground">Native</span>
             </div>
             <div className="flex justify-between items-center text-sm">
-              <span>Russian</span>
-              <span className="text-muted-foreground">Native</span>
+              <span>English</span>
+              <span className="text-muted-foreground">
+                Upper-Intermediate (B2)
+              </span>
             </div>
           </div>
         </div>

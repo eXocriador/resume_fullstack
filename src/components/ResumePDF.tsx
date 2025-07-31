@@ -5,34 +5,18 @@ import {
   View,
   Document,
   StyleSheet,
-  Link,
-  Font
+  Link
 } from "@react-pdf/renderer";
-import { projects } from "./ResumeMain"; // Імпортуємо дані з основного компонента
-
-// Реєструємо шрифти, якщо потрібно (Helvetica є стандартним)
-// Font.register({ family: 'Helvetica', src: 'path/to/helvetica.ttf' });
-
-// const colors = {
-//   background: "#FFFFFF",
-//   foreground: "#262A41", // hsl(220 20% 15%)
-//   card: "#FFFFFF",
-//   primary: "#EF6015", // hsl(10 90% 60%) - Трохи насиченіший для кращого друку
-//   primaryForeground: "#FEF6F3",
-//   secondary: "#F2F3F7", // hsl(220 14% 95%)
-//   mutedForeground: "#707584", // hsl(220 10% 45%)
-//   initialsCircleBg: "rgba(239, 96, 21, 0.1)"
-// };
+import { projects } from "./ResumeMain"; // Дані беремо з одного джерела
 
 const colors = {
-  background: "#F7F8FA", // hsl(220 15% 97%)
-  foreground: "#262A41", // hsl(220 20% 15%)
-  card: "#F7F8FA", // same as background
-  primary: "#EF6015", // hsl(10 90% 60%) — трохи насиченіший, як ти просив
-  primaryForeground: "#FEF6F3", // hsl(10 40% 98%)
-  secondary: "#F2F3F7", // hsl(220 14% 95%)
-  mutedForeground: "#707584", // hsl(220 10% 45%)
-  initialsCircleBg: "rgba(239, 96, 21, 0.1)" // прозоре коло з основним тоном
+  background: "#FFFFFF",
+  foreground: "#1d2033",
+  primary: "#F76B15",
+  secondary: "#f1f2f6",
+  mutedForeground: "#696e79",
+  initialsCircleBg: "rgba(247, 107, 21, 0.1)",
+  border: "#E5E7EB"
 };
 
 const styles = StyleSheet.create({
@@ -41,13 +25,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     fontFamily: "Helvetica"
   },
-  // --- Ліва колонка (Сайдбар) ---
-  sidebar: {
-    width: "38%",
-    padding: 24,
-    backgroundColor: colors.secondary,
-    color: colors.foreground
-  },
+
+  // --- Sidebar ---
+  sidebar: { width: "38%", padding: 24, backgroundColor: colors.secondary },
   profileContainer: {
     textAlign: "center",
     marginBottom: 24,
@@ -68,56 +48,34 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold"
   },
   name: {
-    fontSize: 24,
+    fontSize: 22,
     fontFamily: "Helvetica-Bold",
     marginBottom: 4,
     color: colors.foreground
   },
-  jobTitle: {
-    fontSize: 12,
-    color: colors.mutedForeground
-  },
-  section: {
-    marginBottom: 20
-  },
+  jobTitle: { fontSize: 11, color: colors.mutedForeground },
+  section: { marginBottom: 20 },
   sectionTitle: {
     fontSize: 14,
     fontFamily: "Helvetica-Bold",
     color: colors.primary,
-    marginBottom: 12
+    marginBottom: 10
   },
-  contactItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 6,
-    fontSize: 9,
-    color: colors.mutedForeground
-  },
-  link: {
-    color: colors.mutedForeground,
-    textDecoration: "none"
-  },
+  contactItem: { marginBottom: 6, fontSize: 9, color: colors.mutedForeground },
+  link: { color: colors.mutedForeground, textDecoration: "none" },
+  skillSection: { display: "flex", flexDirection: "column", gap: 6 },
+  skillItem: { flexDirection: "row", alignItems: "flex-start" },
   skillCategory: {
-    marginBottom: 12
-  },
-  skillTitle: {
-    fontSize: 11,
+    width: "35%",
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
-    marginBottom: 6,
     color: colors.foreground
   },
-  skillBadgeContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 4
-  },
-  skillBadge: {
-    backgroundColor: "#E4E5E9",
-    color: colors.foreground,
-    paddingHorizontal: 6,
-    paddingVertical: 3,
-    borderRadius: 4,
-    fontSize: 9
+  skillText: {
+    width: "65%",
+    fontSize: 9,
+    color: colors.mutedForeground,
+    lineHeight: 1.3
   },
   languageItem: {
     flexDirection: "row",
@@ -127,31 +85,30 @@ const styles = StyleSheet.create({
     color: colors.foreground
   },
 
-  // --- Права колонка (Основний контент) ---
+  // --- Main Content ---
   mainContent: {
     width: "62%",
-    padding: 28
+    padding: "28px 28px 20px 28px",
+    display: "flex",
+    flexDirection: "column"
   },
-  mainSection: {
-    marginBottom: 24
-  },
+  mainSection: { marginBottom: 18 },
   mainSectionTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: "Helvetica-Bold",
     color: colors.primary,
-    marginBottom: 16
+    marginBottom: 12
   },
-  entry: {
-    marginBottom: 16
-  },
+  projectsContainer: { display: "flex", flexDirection: "column", gap: 12 },
+  entry: {},
   entryHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 4
+    marginBottom: 2
   },
   entryTitle: {
-    fontSize: 14,
+    fontSize: 13,
     fontFamily: "Helvetica-Bold",
     color: colors.foreground
   },
@@ -159,60 +116,53 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontFamily: "Helvetica-Bold",
     color: colors.primary,
-    marginBottom: 6
+    marginBottom: 4
   },
-  entryDate: {
-    fontSize: 9,
-    color: colors.mutedForeground
-  },
-  description: {
-    fontSize: 10,
-    color: colors.mutedForeground,
-    lineHeight: 1.5
-  },
-  projectLinks: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8
-  },
-  projectLink: {
-    fontSize: 9,
-    color: colors.mutedForeground,
-    textDecoration: "none"
-  },
+  entryDate: { fontSize: 9, color: colors.mutedForeground },
+  description: { fontSize: 9, color: colors.mutedForeground, lineHeight: 1.4 },
+  projectLinks: { flexDirection: "row", alignItems: "center", gap: 4 },
   badgeContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginTop: 8,
-    gap: 6
+    marginTop: 4,
+    marginBottom: 6,
+    gap: 4
   },
   badge: {
-    backgroundColor: colors.primary,
-    color: colors.primaryForeground,
-    paddingHorizontal: 8,
+    backgroundColor: colors.background,
+    color: colors.foreground,
+    paddingHorizontal: 6,
     paddingVertical: 3,
-    borderRadius: 12,
-    fontSize: 8
+    borderRadius: 4,
+    fontSize: 8,
+    borderWidth: 1,
+    borderColor: colors.border
   },
-  eduListItem: {
-    flexDirection: "row",
-    marginBottom: 5
-  },
-  bullet: {
-    width: 10,
-    fontSize: 10,
-    lineHeight: 1.4
-  },
+  eduListItem: { flexDirection: "row", marginBottom: 4 },
+  bullet: { width: 10, fontSize: 10, lineHeight: 1.4 },
   eduText: {
-    fontSize: 10,
+    flex: 1,
+    fontSize: 9,
     lineHeight: 1.4,
     color: colors.mutedForeground
   },
-  eduTextBold: {
-    fontFamily: "Helvetica-Bold",
-    color: colors.foreground
-  }
+  eduTextBold: { fontFamily: "Helvetica-Bold", color: colors.foreground }
 });
+
+const techSkillsData = [
+  { category: "Languages", skills: "TypeScript, JavaScript (ES6+)" },
+  {
+    category: "Frontend",
+    skills: "React, Next.js, Redux, HTML5, CSS3, Tailwind CSS"
+  },
+  { category: "Backend", skills: "Node.js, Express.js" },
+  { category: "Databases", skills: "MongoDB, PostgreSQL, Redis" },
+  { category: "APIs", skills: "REST, GraphQL, WebSockets" },
+  {
+    category: "Tools",
+    skills: "Git, GitHub, Docker, Vite, Postman, Stripe API"
+  }
+];
 
 export const ResumePDF = () => (
   <Document
@@ -220,7 +170,7 @@ export const ResumePDF = () => (
     title="Oleh Tatarynov - Fullstack Developer Resume"
   >
     <Page size="A4" style={styles.page}>
-      {/* ЛІВИЙ САЙДБАР */}
+      {/* SIDEBAR */}
       <View style={styles.sidebar}>
         <View style={styles.profileContainer}>
           <View style={styles.initialsCircle}>
@@ -229,7 +179,6 @@ export const ResumePDF = () => (
           <Text style={styles.name}>Oleh Tatarynov</Text>
           <Text style={styles.jobTitle}>Full-Stack Developer</Text>
         </View>
-
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Contact</Text>
           <Link src="mailto:oleh.tatarynov@gmail.com" style={styles.link}>
@@ -247,36 +196,17 @@ export const ResumePDF = () => (
             <Text style={styles.contactItem}>exocriador.dev</Text>
           </Link>
         </View>
-
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Technical Skills</Text>
-          <View style={styles.skillCategory}>
-            <Text style={styles.skillTitle}>Programming Languages</Text>
-            <View style={styles.skillBadgeContainer}>
-              <Text style={styles.skillBadge}>TypeScript</Text>
-              <Text style={styles.skillBadge}>JavaScript (ES6+)</Text>
-            </View>
+          <View style={styles.skillSection}>
+            {techSkillsData.map(({ category, skills }) => (
+              <View key={category} style={styles.skillItem}>
+                <Text style={styles.skillCategory}>{category}</Text>
+                <Text style={styles.skillText}>{skills}</Text>
+              </View>
+            ))}
           </View>
-          <View style={styles.skillCategory}>
-            <Text style={styles.skillTitle}>Frontend</Text>
-            <View style={styles.skillBadgeContainer}>
-              {[
-                "React",
-                "Next.js",
-                "Redux Toolkit",
-                "HTML5",
-                "CSS3",
-                "Tailwind CSS"
-              ].map((skill) => (
-                <Text key={skill} style={styles.skillBadge}>
-                  {skill}
-                </Text>
-              ))}
-            </View>
-          </View>
-          {/* ... Add other skills similarly */}
         </View>
-
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Languages</Text>
           <View style={styles.languageItem}>
@@ -292,7 +222,7 @@ export const ResumePDF = () => (
         </View>
       </View>
 
-      {/* ПРАВА КОЛОНКА */}
+      {/* MAIN CONTENT */}
       <View style={styles.mainContent}>
         <View style={styles.mainSection}>
           <Text style={styles.mainSectionTitle}>About Me</Text>
@@ -304,46 +234,52 @@ export const ResumePDF = () => (
             environments, aiming to contribute to innovative projects.
           </Text>
         </View>
-
         <View style={styles.mainSection}>
           <Text style={styles.mainSectionTitle}>Projects</Text>
-          {projects.map((project, index) => (
-            <View
-              key={index}
+          <View style={styles.projectsContainer}>
+            {projects.map((project) => (
+              <View key={project.name} style={styles.entry}>
+                <View style={styles.entryHeader}>
+                  <Text style={styles.entryTitle}>{project.name}</Text>
+                  <View style={styles.projectLinks}>
+                    <Link src={project.github} style={styles.link}>
+                      <Text>Code</Text>
+                    </Link>
+                    <Text
+                      style={{ color: colors.mutedForeground, fontSize: 9 }}
+                    >
+                      {" "}
+                      |{" "}
+                    </Text>
+                    <Link src={project.demo} style={styles.link}>
+                      <Text>Demo</Text>
+                    </Link>
+                  </View>
+                </View>
+                <View style={styles.badgeContainer}>
+                  {project.tech.map((tech) => (
+                    <Text key={tech} style={styles.badge}>
+                      {tech}
+                    </Text>
+                  ))}
+                </View>
+                <Text style={styles.description}>{project.description}</Text>
+              </View>
+            ))}
+          </View>
+          <View style={{ marginTop: 12, alignItems: "flex-end" }}>
+            <Link
+              src="https://github.com/exocriador"
               style={[
-                styles.entry,
-                {
-                  borderBottom: index < projects.length - 1 ? 1 : 0,
-                  borderBottomColor: colors.secondary,
-                  paddingBottom: index < projects.length - 1 ? 16 : 0
-                }
+                styles.link,
+                { fontSize: 9, color: colors.mutedForeground }
               ]}
             >
-              <View style={styles.entryHeader}>
-                <Text style={styles.entryTitle}>{project.name}</Text>
-                <View style={styles.projectLinks}>
-                  <Link src={project.github} style={styles.projectLink}>
-                    Code
-                  </Link>
-                  <Text style={{ color: colors.mutedForeground }}> | </Text>
-                  <Link src={project.demo} style={styles.projectLink}>
-                    Demo
-                  </Link>
-                </View>
-              </View>
-              <Text style={styles.description}>{project.description}</Text>
-              <View style={styles.badgeContainer}>
-                {project.tech.map((tech) => (
-                  <Text key={tech} style={styles.badge}>
-                    {tech}
-                  </Text>
-                ))}
-              </View>
-            </View>
-          ))}
+              <Text>View More Projects ›</Text>
+            </Link>
+          </View>
         </View>
-
-        <View style={styles.mainSection}>
+        <View style={[styles.mainSection, { marginBottom: 0 }]}>
           <Text style={styles.mainSectionTitle}>Education</Text>
           <View style={styles.entry}>
             <View style={styles.entryHeader}>
