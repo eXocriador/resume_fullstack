@@ -13,15 +13,26 @@ import { projects } from "./ResumeMain"; // Імпортуємо дані з о�
 // Реєструємо шрифти, якщо потрібно (Helvetica є стандартним)
 // Font.register({ family: 'Helvetica', src: 'path/to/helvetica.ttf' });
 
+// const colors = {
+//   background: "#FFFFFF",
+//   foreground: "#262A41", // hsl(220 20% 15%)
+//   card: "#FFFFFF",
+//   primary: "#EF6015", // hsl(10 90% 60%) - Трохи насиченіший для кращого друку
+//   primaryForeground: "#FEF6F3",
+//   secondary: "#F2F3F7", // hsl(220 14% 95%)
+//   mutedForeground: "#707584", // hsl(220 10% 45%)
+//   initialsCircleBg: "rgba(239, 96, 21, 0.1)"
+// };
+
 const colors = {
-  background: "#FFFFFF",
+  background: "#F7F8FA", // hsl(220 15% 97%)
   foreground: "#262A41", // hsl(220 20% 15%)
-  card: "#FFFFFF",
-  primary: "#EF6015", // hsl(10 90% 60%) - Трохи насиченіший для кращого друку
-  primaryForeground: "#FEF6F3",
+  card: "#F7F8FA", // same as background
+  primary: "#EF6015", // hsl(10 90% 60%) — трохи насиченіший, як ти просив
+  primaryForeground: "#FEF6F3", // hsl(10 40% 98%)
   secondary: "#F2F3F7", // hsl(220 14% 95%)
   mutedForeground: "#707584", // hsl(220 10% 45%)
-  initialsCircleBg: "rgba(239, 96, 21, 0.1)"
+  initialsCircleBg: "rgba(239, 96, 21, 0.1)" // прозоре коло з основним тоном
 };
 
 const styles = StyleSheet.create({
