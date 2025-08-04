@@ -10,20 +10,6 @@ import {
 } from "@react-pdf/renderer";
 import { projects } from "./ResumeMain"; // Імпортуємо дані з основного компонента
 
-// Реєструємо шрифти, якщо потрібно (Helvetica є стандартним)
-// Font.register({ family: 'Helvetica', src: 'path/to/helvetica.ttf' });
-
-// const colors = {
-//   background: "#FFFFFF",
-//   foreground: "#262A41", // hsl(220 20% 15%)
-//   card: "#FFFFFF",
-//   primary: "#EF6015", // hsl(10 90% 60%) - Трохи насиченіший для кращого друку
-//   primaryForeground: "#FEF6F3",
-//   secondary: "#F2F3F7", // hsl(220 14% 95%)
-//   mutedForeground: "#707584", // hsl(220 10% 45%)
-//   initialsCircleBg: "rgba(239, 96, 21, 0.1)"
-// };
-
 const colors = {
   background: "#F7F8FA", // hsl(220 15% 97%)
   foreground: "#262A41", // hsl(220 20% 15%)
