@@ -26,11 +26,11 @@ import { projects } from "./ResumeMain"; // Import data from the main component
 const colors = {
   background: "#FFFFFF",
   foreground: "#111827",
-  primary: "#3b82f6", // blue-500
+  primary: "#F76B5B", // Ваш помаранчевий (hsl(10, 90%, 60%))
   secondary: "#f3f4f6", // gray-100
   secondaryForeground: "#374151",
   mutedForeground: "#6b7281",
-  primaryForeground: "#f9fafb",
+  primaryForeground: "#FFFFFF", // Білий для кращого контрасту на помаранчевому
   card: "#FFFFFF",
   border: "#e5e7eb"
 };
