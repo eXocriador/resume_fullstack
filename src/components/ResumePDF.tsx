@@ -8,31 +8,46 @@ import {
   Link,
   Font
 } from "@react-pdf/renderer";
-import { projects } from "./ResumeMain"; // Імпортуємо дані з основного компонента
+import { projects } from "./ResumeMain"; // Import data from the main component
 
+// --- FONT REGISTRATION ---
+// Download fonts from Google Fonts (e.g., Inter) and place them in public/fonts
+// This is crucial for consistent rendering
+// Font.register({
+//   family: "Inter",
+//   fonts: [
+//     { src: "/fonts/Inter-Regular.ttf" },
+//     { src: "/fonts/Inter-SemiBold.ttf", fontWeight: 600 },
+//     { src: "/fonts/Inter-Bold.ttf", fontWeight: 700 },
+//   ],
+// });
+
+// --- COLOR PALETTE (matching index.css) ---
 const colors = {
-  background: "#F7F8FA", // hsl(220 15% 97%)
-  foreground: "#262A41", // hsl(220 20% 15%)
-  card: "#F7F8FA", // same as background
-  primary: "#EF6015", // hsl(10 90% 60%) — трохи насиченіший, як ти просив
-  primaryForeground: "#FEF6F3", // hsl(10 40% 98%)
-  secondary: "#F2F3F7", // hsl(220 14% 95%)
-  mutedForeground: "#707584", // hsl(220 10% 45%)
-  initialsCircleBg: "rgba(239, 96, 21, 0.1)" // прозоре коло з основним тоном
+  background: "#FFFFFF",
+  foreground: "#111827",
+  primary: "#3b82f6", // blue-500
+  secondary: "#f3f4f6", // gray-100
+  secondaryForeground: "#374151",
+  mutedForeground: "#6b7281",
+  primaryForeground: "#f9fafb",
+  card: "#FFFFFF",
+  border: "#e5e7eb"
 };
 
+// --- STYLESHEET ---
 const styles = StyleSheet.create({
   page: {
     flexDirection: "row",
     backgroundColor: colors.background,
-    fontFamily: "Helvetica"
+    fontFamily: "Helvetica" // Fallback, use registered font like "Inter"
   },
-  // --- Ліва колонка (Сайдбар) ---
+  // --- LEFT COLUMN (SIDEBAR) ---
   sidebar: {
-    width: "38%",
+    width: "35%",
     padding: 24,
     backgroundColor: colors.secondary,
-    color: colors.foreground
+    color: colors.secondaryForeground
   },
   profileContainer: {
     textAlign: "center",
@@ -43,7 +58,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: colors.initialsCircleBg,
+    backgroundColor: "rgba(59, 130, 246, 0.1)", // primary with opacity
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 12
@@ -54,28 +69,30 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold"
   },
   name: {
-    fontSize: 24,
+    fontSize: 22,
     fontFamily: "Helvetica-Bold",
     marginBottom: 4,
     color: colors.foreground
   },
   jobTitle: {
-    fontSize: 12,
+    fontSize: 11,
     color: colors.mutedForeground
   },
   section: {
     marginBottom: 20
   },
   sectionTitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: "Helvetica-Bold",
     color: colors.primary,
-    marginBottom: 12
+    textTransform: "uppercase",
+    letterSpacing: 1,
+    marginBottom: 10
   },
   contactItem: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 6,
+    marginBottom: 8,
     fontSize: 9,
     color: colors.mutedForeground
   },
@@ -87,45 +104,47 @@ const styles = StyleSheet.create({
     marginBottom: 12
   },
   skillTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
     marginBottom: 6,
     color: colors.foreground
   },
   skillBadgeContainer: {
     flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 4
+    flexWrap: "wrap"
   },
   skillBadge: {
-    backgroundColor: "#E4E5E9",
+    backgroundColor: "#e5e7eb", // gray-200
     color: colors.foreground,
     paddingHorizontal: 6,
     paddingVertical: 3,
     borderRadius: 4,
-    fontSize: 9
+    fontSize: 9,
+    marginRight: 4,
+    marginBottom: 4
   },
   languageItem: {
     flexDirection: "row",
     justifyContent: "space-between",
     fontSize: 10,
-    marginBottom: 4,
-    color: colors.foreground
+    marginBottom: 4
   },
 
-  // --- Права колонка (Основний контент) ---
+  // --- RIGHT COLUMN (MAIN CONTENT) ---
   mainContent: {
-    width: "62%",
+    width: "65%",
     padding: 28
   },
   mainSection: {
     marginBottom: 24
   },
   mainSectionTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: "Helvetica-Bold",
     color: colors.primary,
-    marginBottom: 16
+    marginBottom: 16,
+    flexDirection: "row",
+    alignItems: "center"
   },
   entry: {
     marginBottom: 16
@@ -158,19 +177,18 @@ const styles = StyleSheet.create({
   },
   projectLinks: {
     flexDirection: "row",
-    alignItems: "center",
-    gap: 8
+    alignItems: "center"
   },
   projectLink: {
     fontSize: 9,
     color: colors.mutedForeground,
-    textDecoration: "none"
+    textDecoration: "none",
+    paddingHorizontal: 4
   },
   badgeContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginTop: 8,
-    gap: 6
+    marginTop: 8
   },
   badge: {
     backgroundColor: colors.primary,
@@ -178,7 +196,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 12,
-    fontSize: 8
+    fontSize: 8,
+    marginRight: 6,
+    marginBottom: 4
   },
   eduListItem: {
     flexDirection: "row",
@@ -190,6 +210,7 @@ const styles = StyleSheet.create({
     lineHeight: 1.4
   },
   eduText: {
+    flex: 1,
     fontSize: 10,
     lineHeight: 1.4,
     color: colors.mutedForeground
@@ -197,6 +218,11 @@ const styles = StyleSheet.create({
   eduTextBold: {
     fontFamily: "Helvetica-Bold",
     color: colors.foreground
+  },
+  separator: {
+    marginTop: 16,
+    height: 1,
+    backgroundColor: colors.border
   }
 });
 
@@ -206,7 +232,7 @@ export const ResumePDF = () => (
     title="Oleh Tatarynov - Fullstack Developer Resume"
   >
     <Page size="A4" style={styles.page}>
-      {/* ЛІВИЙ САЙДБАР */}
+      {/* LEFT SIDEBAR */}
       <View style={styles.sidebar}>
         <View style={styles.profileContainer}>
           <View style={styles.initialsCircle}>
@@ -221,7 +247,7 @@ export const ResumePDF = () => (
           <Link src="mailto:oleh.tatarynov@gmail.com" style={styles.link}>
             <Text style={styles.contactItem}>oleh.tatarynov@gmail.com</Text>
           </Link>
-          <Text style={styles.contactItem}>+380 XX XXX XX XX</Text>
+          <Text style={styles.contactItem}>+380 12 345 67 89</Text>
           <Text style={styles.contactItem}>Kyiv, Ukraine</Text>
           <Link src="https://github.com/exocriador" style={styles.link}>
             <Text style={styles.contactItem}>github.com/exocriador</Text>
@@ -237,36 +263,59 @@ export const ResumePDF = () => (
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Technical Skills</Text>
           <View style={styles.skillCategory}>
-            <Text style={styles.skillTitle}>Programming Languages</Text>
+            <Text style={styles.skillTitle}>Frontend</Text>
             <View style={styles.skillBadgeContainer}>
-              <Text style={styles.skillBadge}>TypeScript</Text>
-              <Text style={styles.skillBadge}>JavaScript (ES6+)</Text>
+              {["TypeScript", "React", "Next.js", "Redux", "Tailwind CSS"].map(
+                (skill) => (
+                  <Text key={skill} style={styles.skillBadge}>
+                    {skill}
+                  </Text>
+                )
+              )}
             </View>
           </View>
           <View style={styles.skillCategory}>
-            <Text style={styles.skillTitle}>Frontend</Text>
+            <Text style={styles.skillTitle}>Backend</Text>
             <View style={styles.skillBadgeContainer}>
-              {[
-                "React",
-                "Next.js",
-                "Redux Toolkit",
-                "HTML5",
-                "CSS3",
-                "Tailwind CSS"
-              ].map((skill) => (
+              {["Node.js", "Express.js", "GraphQL"].map((skill) => (
                 <Text key={skill} style={styles.skillBadge}>
                   {skill}
                 </Text>
               ))}
             </View>
           </View>
-          {/* ... Add other skills similarly */}
+          <View style={styles.skillCategory}>
+            <Text style={styles.skillTitle}>Databases</Text>
+            <View style={styles.skillBadgeContainer}>
+              {["PostgreSQL", "MongoDB", "Redis"].map((skill) => (
+                <Text key={skill} style={styles.skillBadge}>
+                  {skill}
+                </Text>
+              ))}
+            </View>
+          </View>
+          <View style={styles.skillCategory}>
+            <Text style={styles.skillTitle}>DevOps & Tools</Text>
+            <View style={styles.skillBadgeContainer}>
+              {["Docker", "Git", "GitHub", "Vite", "Postman", "Swagger"].map(
+                (skill) => (
+                  <Text key={skill} style={styles.skillBadge}>
+                    {skill}
+                  </Text>
+                )
+              )}
+            </View>
+          </View>
         </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Languages</Text>
           <View style={styles.languageItem}>
             <Text>Ukrainian</Text>
+            <Text style={{ color: colors.mutedForeground }}>Native</Text>
+          </View>
+          <View style={styles.languageItem}>
+            <Text>Russian</Text>
             <Text style={{ color: colors.mutedForeground }}>Native</Text>
           </View>
           <View style={styles.languageItem}>
@@ -278,40 +327,30 @@ export const ResumePDF = () => (
         </View>
       </View>
 
-      {/* ПРАВА КОЛОНКА */}
+      {/* RIGHT CONTENT */}
       <View style={styles.mainContent}>
         <View style={styles.mainSection}>
-          <Text style={styles.mainSectionTitle}>About Me</Text>
+          <Text style={styles.mainSectionTitle}>Summary</Text>
           <Text style={styles.description}>
-            A results-oriented Full-Stack Developer and recent GoIT Academy
-            graduate, passionate about building robust and user-friendly web
-            applications with the MERN stack and TypeScript. I transform complex
-            problems into clean, efficient code and excel in dynamic team
-            environments, aiming to contribute to innovative projects.
+            Full-Stack Developer with a solid foundation in the MERN stack and
+            TypeScript, recently graduated from GoIT Academy. I specialize in
+            transforming complex requirements into clean, high-performance web
+            applications. My focus is on writing scalable code and building
+            intuitive user interfaces to solve real-world problems.
           </Text>
         </View>
 
         <View style={styles.mainSection}>
           <Text style={styles.mainSectionTitle}>Projects</Text>
           {projects.map((project, index) => (
-            <View
-              key={index}
-              style={[
-                styles.entry,
-                {
-                  borderBottom: index < projects.length - 1 ? 1 : 0,
-                  borderBottomColor: colors.secondary,
-                  paddingBottom: index < projects.length - 1 ? 16 : 0
-                }
-              ]}
-            >
+            <View key={index} style={styles.entry}>
               <View style={styles.entryHeader}>
                 <Text style={styles.entryTitle}>{project.name}</Text>
                 <View style={styles.projectLinks}>
                   <Link src={project.github} style={styles.projectLink}>
                     Code
                   </Link>
-                  <Text style={{ color: colors.mutedForeground }}> | </Text>
+                  <Text style={{ color: colors.mutedForeground }}>|</Text>
                   <Link src={project.demo} style={styles.projectLink}>
                     Demo
                   </Link>
@@ -325,6 +364,7 @@ export const ResumePDF = () => (
                   </Text>
                 ))}
               </View>
+              {index < projects.length - 1 && <View style={styles.separator} />}
             </View>
           ))}
         </View>
@@ -336,40 +376,40 @@ export const ResumePDF = () => (
               <Text style={styles.entryTitle}>
                 Fullstack Developer Certificate
               </Text>
-              <Text style={styles.entryDate}>10/07/2025</Text>
+              <Text style={styles.entryDate}>2024 - 2025</Text>
             </View>
-            <Text style={styles.entrySubtitle}>GoIT Academy (ID: 39063)</Text>
+            <Text style={styles.entrySubtitle}>GoIT Academy</Text>
             <Text style={styles.description}>
-              A comprehensive 10-month program (680+ hours) covering modern web
-              technologies and best practices through hands-on projects.
+              A comprehensive 10-month program (680+ hours) focused on modern
+              web technologies and best practices.
             </Text>
             <View style={{ marginTop: 8 }}>
               <View style={styles.eduListItem}>
                 <Text style={styles.bullet}>•</Text>
                 <Text style={styles.eduText}>
-                  <Text style={styles.eduTextBold}>HTML+CSS:</Text> Responsive
-                  Design, Flexbox, Forms.
+                  <Text style={styles.eduTextBold}>Core Web:</Text> Responsive
+                  Design, Flexbox, Grid, HTML5, CSS3.
                 </Text>
               </View>
               <View style={styles.eduListItem}>
                 <Text style={styles.bullet}>•</Text>
                 <Text style={styles.eduText}>
-                  <Text style={styles.eduTextBold}>JavaScript:</Text> ES6+, DOM,
-                  Asynchrony, HTTP requests.
+                  <Text style={styles.eduTextBold}>JavaScript:</Text> ES6+, DOM
+                  API, Asynchrony, REST API.
                 </Text>
               </View>
               <View style={styles.eduListItem}>
                 <Text style={styles.bullet}>•</Text>
                 <Text style={styles.eduText}>
-                  <Text style={styles.eduTextBold}>React:</Text> Components,
-                  Hooks, State Management (Redux), Routing.
+                  <Text style={styles.eduTextBold}>React:</Text> Component-based
+                  architecture, Hooks, Redux, Routing.
                 </Text>
               </View>
               <View style={styles.eduListItem}>
                 <Text style={styles.bullet}>•</Text>
                 <Text style={styles.eduText}>
-                  <Text style={styles.eduTextBold}>Node.js:</Text> Express, REST
-                  API, MongoDB, Authentication (JWT), Docker.
+                  <Text style={styles.eduTextBold}>Node.js:</Text> Express,
+                  MongoDB, JWT Authentication, WebSockets, Docker basics.
                 </Text>
               </View>
             </View>

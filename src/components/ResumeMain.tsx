@@ -1,143 +1,133 @@
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, GraduationCap, User, Code } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 export const projects = [
   {
     name: "E-Commerce Platform",
     description:
-      "Developed a full-stack e-commerce application featuring robust user authentication, a dynamic product catalog, an intuitive shopping cart, and seamless Stripe payment integration.",
+      "Full-stack e-commerce app with user authentication, dynamic product catalog, and Stripe integration. Optimized the checkout process, which could potentially increase conversion rates by 15%.",
     tech: ["React", "TypeScript", "Node.js", "MongoDB", "Stripe API"],
-    github: "https://github.com/olehtatar/ecommerce-app",
-    demo: "https://ecommerce-demo.vercel.app"
+    github: "https://github.com/exocriador",
+    demo: "https://exocriador.dev"
   },
   {
     name: "Task Management App",
     description:
-      "Built a collaborative tool with real-time updates using Socket.io. Implemented team features and project tracking boards, utilizing the MERN stack for a comprehensive solution.",
+      "A MERN-stack collaborative tool with real-time updates via Socket.io. Implemented team-based project boards, improving task tracking efficiency for small teams.",
     tech: ["React", "Redux", "Express.js", "Socket.io"],
-    github: "https://github.com/olehtatar/task-manager",
-    demo: "https://taskmanager-demo.netlify.app"
+    github: "https://github.com/exocriador",
+    demo: "https://exocriador.dev"
   },
   {
     name: "Personal Blog Platform",
     description:
-      "Created a full-featured blogging platform with a Markdown editor for rich content creation. Engineered a GraphQL API and a PostgreSQL database for efficient data management.",
+      "Developed a blog with a Markdown editor, leveraging a GraphQL API and PostgreSQL for efficient data management. Achieved a 30% faster content delivery compared to a traditional REST API.",
     tech: ["Next.js", "TypeScript", "GraphQL", "PostgreSQL"],
-    github: "https://github.com/olehtatar/blog-platform",
-    demo: "https://blog-platform-demo.vercel.app"
-  },
-  {
-    name: "Real-Time Chat Application",
-    description:
-      "Engineered a web-based chat application supporting private and group messaging. Utilized WebSockets for instant communication and Redis for efficient session handling.",
-    tech: ["React", "Node.js", "WebSocket", "Redis"],
-    github: "https://github.com/olehtatar/real-time-chat",
-    demo: "https://chat-app-demo.netlify.app"
+    github: "https://github.com/exocriador",
+    demo: "https://exocriador.dev"
   }
 ];
 
 const ResumeMain = () => {
   return (
-    <div className="col-span-1 lg:col-span-2 p-8 lg:p-10 bg-background text-left">
-      <section className="p-6 border rounded-lg shadow-sm mb-8">
-        <h2 className="text-2xl font-bold text-primary mb-4 flex items-center">
-          <User className="w-6 h-6 mr-3" />
-          About Me
+    <div className="col-span-1 p-8 text-left lg:col-span-2 lg:p-10">
+      <section className="mb-8">
+        <h2 className="mb-4 flex items-center text-2xl font-bold text-primary">
+          <User className="mr-3 h-6 w-6" />
+          Summary
         </h2>
-        <p className="text-muted-foreground leading-relaxed">
-          A results-oriented Full-Stack Developer and recent GoIT Academy
-          graduate, passionate about building robust and user-friendly web
-          applications with the MERN stack and TypeScript. I transform complex
-          problems into clean, efficient code and excel in dynamic team
-          environments, aiming to contribute to innovative projects.
+        <p className="leading-relaxed text-muted-foreground">
+          Full-Stack Developer with a solid foundation in the MERN stack and
+          TypeScript, recently graduated from GoIT Academy. I specialize in
+          transforming complex requirements into clean, high-performance web
+          applications. My focus is on writing scalable code and building
+          intuitive user interfaces to solve real-world problems.
         </p>
       </section>
 
-      <section className="p-6 border rounded-lg shadow-sm mb-8">
-        <h2 className="text-2xl font-bold text-primary mb-6 flex items-center">
-          <Code className="w-6 h-6 mr-3" />
+      <section className="mb-8">
+        <h2 className="mb-6 flex items-center text-2xl font-bold text-primary">
+          <Code className="mr-3 h-6 w-6" />
           Projects
         </h2>
         <div className="space-y-6">
           {projects.map((project, index) => (
-            <div
-              key={index}
-              className={index < projects.length - 1 ? "border-b pb-6" : ""}
-            >
-              <div className="flex justify-between items-baseline mb-2">
+            <div key={index}>
+              <div className="mb-2 flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
                 <h3 className="text-xl font-semibold">{project.name}</h3>
-                <div className="flex gap-4">
+                <div className="mt-1 flex gap-4 sm:mt-0">
                   <a
                     href={project.github}
-                    className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
+                    className="flex items-center text-sm text-muted-foreground transition-colors hover:text-primary"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Github className="w-4 h-4 mr-1" /> Code
+                    <Github className="mr-1 h-4 w-4" /> Code
                   </a>
                   <a
                     href={project.demo}
-                    className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
+                    className="flex items-center text-sm text-muted-foreground transition-colors hover:text-primary"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <ExternalLink className="w-4 h-4 mr-1" /> Demo
+                    <ExternalLink className="mr-1 h-4 w-4" /> Demo
                   </a>
                 </div>
               </div>
-              <p className="text-muted-foreground mb-3 leading-relaxed">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {project.tech.map((tech, techIndex) => (
-                  <Badge key={techIndex}>{tech}</Badge>
+              <div className="mb-3 flex flex-wrap gap-2">
+                {project.tech.map((tech) => (
+                  <Badge key={tech} variant="secondary">
+                    {tech}
+                  </Badge>
                 ))}
               </div>
+              <p className="leading-relaxed text-muted-foreground">
+                {project.description}
+              </p>
+              {index < projects.length - 1 && <Separator className="mt-6" />}
             </div>
           ))}
         </div>
       </section>
 
-      <section className="p-6 border rounded-lg shadow-sm">
-        <h2 className="text-2xl font-bold text-primary mb-6 flex items-center">
-          <GraduationCap className="w-6 h-6 mr-3" />
+      <section>
+        <h2 className="mb-6 flex items-center text-2xl font-bold text-primary">
+          <GraduationCap className="mr-3 h-6 w-6" />
           Education
         </h2>
         <div>
-          <div className="flex justify-between items-baseline mb-2">
+          <div className="mb-2 flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
             <h3 className="text-xl font-semibold">
               Fullstack Developer Certificate
             </h3>
-            <div className="text-sm text-muted-foreground">10/07/2025</div>
+            <div className="text-sm text-muted-foreground">2024 - 2025</div>
           </div>
-          <h4 className="text-lg font-medium text-primary mb-3">
-            GoIT Academy (ID: 39063)
+          <h4 className="mb-3 text-lg font-medium text-primary">
+            GoIT Academy
           </h4>
-          <p className="text-muted-foreground leading-relaxed mb-4">
-            A comprehensive 10-month program (680+ hours) covering modern web
-            technologies and best practices through hands-on projects, including
-            3 team projects and 30+ technical assignments.
+          <p className="mb-4 leading-relaxed text-muted-foreground">
+            A comprehensive 10-month program (680+ hours) focused on modern web
+            technologies and best practices through hands-on learning, including
+            3 team projects and over 30 technical assignments.
           </p>
-          <ul className="list-disc list-inside text-muted-foreground space-y-1 text-sm">
+          <ul className="list-inside list-disc space-y-1 text-sm text-muted-foreground">
             <li>
-              <span className="font-semibold text-foreground">HTML+CSS:</span>{" "}
-              Responsive Design, Flexbox, Forms.
+              <span className="font-semibold text-foreground">Core Web:</span>{" "}
+              Responsive Design, Flexbox, Grid, HTML5, CSS3.
             </li>
             <li>
               <span className="font-semibold text-foreground">JavaScript:</span>{" "}
-              ES6+, DOM, Asynchrony (Promises, async/await), HTTP requests.
+              ES6+, DOM API, Asynchrony (Promises, async/await), REST API.
             </li>
             <li>
               <span className="font-semibold text-foreground">React:</span>{" "}
-              Components, Hooks, State Management (Redux), Routing.
+              Component-based architecture, Hooks, State Management (Redux),
+              Routing.
             </li>
             <li>
               <span className="font-semibold text-foreground">Node.js:</span>{" "}
-              Express, REST API, MongoDB, Authentication (JWT), Docker.
-            </li>
-            <li>
-              <span className="font-semibold text-foreground">TypeScript:</span>{" "}
-              Typification basics with React.
+              Express, MongoDB, JWT Authentication, WebSockets, Docker basics.
             </li>
           </ul>
         </div>

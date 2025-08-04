@@ -4,25 +4,25 @@
 
 @layer base {
   :root {
-    --background: 220 15% 97%;
-    --foreground: 220 20% 15%;
-    --card: 220 15% 97%;
-    --card-foreground: 220 20% 15%;
-    --popover: 220 15% 97%;
-    --popover-foreground: 220 20% 15%;
-    --primary: 10 90% 60%; /* Persimmon */
-    --primary-foreground: 10 40% 98%;
-    --secondary: 220 14% 95%;
-    --secondary-foreground: 220 20% 15%;
-    --muted: 220 14% 95%;
-    --muted-foreground: 220 10% 45%;
-    --accent: 220 14% 94%;
-    --accent-foreground: 220 20% 15%;
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 10 90% 60%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220 9.1% 43.1%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220 9.1% 43.1%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 220 13% 90%;
-    --input: 220 13% 90%;
-    --ring: 10 90% 60%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 71.4% 4.1%;
     --radius: 0.5rem;
   }
 }
@@ -34,55 +34,5 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
-  }
-}
-
-@media print {
-  @page {
-    size: A4;
-    margin: 0; /* Прибираємо стандартні відступи браузера при друку */
-  }
-
-  html,
-  body {
-    width: 210mm; /* Ширина A4 */
-    height: 100%; /* Дозволяємо контенту визначати висоту */
-    margin: 0;
-    padding: 0;
-    background: #fff; /* Забезпечуємо білий фон, ігноруючи теми */
-  }
-
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-    box-shadow: none !important; /* Прибираємо всі тіні для чистого друку */
-  }
-
-  .resume-container {
-    display: grid !important;
-    grid-template-columns: 320px 1fr !important;
-    width: 100% !important;
-    max-width: 100% !important;
-
-    /* КЛЮЧОВІ ЗМІНИ: Видаляємо фіксовану висоту та overflow */
-    height: auto !important;
-    min-height: 297mm; /* Мінімальна висота першої сторінки A4 */
-    overflow: visible !important;
-
-    border-radius: 0 !important;
-    border: none !important;
-  }
-
-  /* Уникаємо розривів сторінок всередині секцій */
-  section,
-  .project-item,
-  .experience-item {
-    page-break-inside: avoid;
-  }
-
-  /* Ховаємо непотрібні елементи, наприклад, перемикач тем */
-  .download-button,
-  .theme-switcher {
-    display: none !important;
   }
 }
